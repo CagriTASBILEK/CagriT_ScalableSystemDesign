@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Manager
 {
@@ -27,6 +28,11 @@ namespace Manager
         private void GameInitiate()
         {
             LevelManager.Instance.LevelInitiate();
+        }
+
+        public void GameRestart()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

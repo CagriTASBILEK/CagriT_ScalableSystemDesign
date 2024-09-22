@@ -1,6 +1,7 @@
 using Control;
 using Event;
 using Interface;
+using Manager;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovementControl))]
@@ -67,6 +68,10 @@ public class PlayerController : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
         GameEvents.InvokePlayerHealthChanged(currentHealth);
+        if (currentHealth <= 0)
+        {
+            GameManager.Instance.GameRestart();
+        }
     }
     
 }
