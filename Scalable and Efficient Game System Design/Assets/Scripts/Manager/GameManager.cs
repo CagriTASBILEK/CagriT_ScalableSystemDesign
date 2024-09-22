@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Manager
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameManager : MonoBehaviour
     {
-        
-    }
+        public static GameManager Instance { get; private set; }
+    
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+    
+        void Start()
+        {
+            GameInitiate();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void GameInitiate()
+        {
+            LevelManager.Instance.LevelInitiate();
+        }
     }
 }
