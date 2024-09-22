@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
         HandleInput();
     }
 
+    /// <summary>
+    /// Handles player input and triggers relevant events.
+    /// </summary>
     private void HandleInput()
     {
         InputData inputData = inputHandler.GetInputData();
@@ -54,15 +57,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the player horizontally.
+    /// </summary>
     private void HandlePlayerMove(float direction)
     {
         playerMovement.MoveHorizontal(direction);
     }
 
+    /// <summary>
+    /// Makes the player jump.
+    /// </summary>
     private void HandlePlayerJump()
     {
         playerMovement.Jump();
     }
+    
+    /// <summary>
+    /// Handles player taking damage.
+    /// </summary>
     private void HandlePlayerTakeDamage(int damage)
     {
         currentHealth -= damage;

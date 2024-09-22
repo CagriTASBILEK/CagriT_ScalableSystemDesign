@@ -4,18 +4,27 @@ using UnityEngine;
 
 namespace Factory
 {
+    /// <summary>
+    /// Factory class used to create and manage obstacles.
+    /// </summary>
     public class ObstacleFactory
     {
         private ObjectPool objectPool;
         private List<ObstacleData> obstacleDataList;
 
+        /// <summary>
+        /// Constructor for the ObstacleFactory class.
+        /// </summary>
         public ObstacleFactory(ObjectPool objectPool)
         {
             this.objectPool = objectPool;
             this.obstacleDataList = new List<ObstacleData>();
             LoadObstacleDataFromResources();
         }
-
+        
+        /// <summary>
+        /// Loads obstacle data from the Resources folder.
+        /// </summary>
         private void LoadObstacleDataFromResources()
         {
             ObstacleData[] obstacleDatas = Resources.LoadAll<ObstacleData>("ObstacleDatas");
@@ -26,6 +35,9 @@ namespace Factory
             }
         }
 
+        /// <summary>
+        /// Creates a new obstacle of the specified type at the given position.
+        /// </summary>
         public IObstacle CreateObstacle(string type, Vector3 position, Transform parent)
         {
             ObstacleData data = null;
@@ -61,6 +73,9 @@ namespace Factory
             return obstacle;
         }
 
+        /// <summary>
+        /// Returns the obstacle to the object pool.
+        /// </summary>
         public void ReturnObstacleToPool(GameObject obstacleObject)
         {
             for (int i = 0; i < obstacleDataList.Count; i++)

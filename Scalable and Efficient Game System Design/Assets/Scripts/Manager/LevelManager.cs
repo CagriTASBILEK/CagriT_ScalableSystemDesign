@@ -44,6 +44,9 @@ namespace Manager
             LoadInitialLevels();
         }
 
+        /// <summary>
+        /// Loads level prefabs from the Resources folder.
+        /// </summary>
         private void LoadLevelPrefabsFromResources()
         {
             GameObject[] levelPrefabs = Resources.LoadAll<GameObject>("LevelPrefabs");
@@ -102,6 +105,9 @@ namespace Manager
             CheckForNewLevel();
         }
 
+        /// <summary>
+        /// Moves the active levels.
+        /// </summary>
         private void MoveActiveLevels()
         {
             float distanceToMove = levelSpeed * Time.deltaTime;
@@ -112,6 +118,9 @@ namespace Manager
             }
         }
 
+        /// <summary>
+        /// Checks if a new level needs to be loaded.
+        /// </summary>
         private void CheckForNewLevel()
         {
             if (activeLevels.Count == 0 || totalDistance >= activeLevels[0].Length)
@@ -121,6 +130,9 @@ namespace Manager
             }
         }
 
+        /// <summary>
+        /// Increases the difficulty level.
+        /// </summary>
         private void IncreaseDifficulty()
         {
             if (currentDifficulty >= maxDifficulty) return;

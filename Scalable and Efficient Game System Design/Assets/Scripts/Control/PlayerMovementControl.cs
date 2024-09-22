@@ -39,6 +39,9 @@ namespace Control
             }
         }
         
+        /// <summary>
+        /// Performs horizontal movement.
+        /// </summary>
         public void MoveHorizontal(float direction)
         {
             int targetLane = currentLane + (int)Mathf.Sign(direction);
@@ -48,7 +51,9 @@ namespace Control
                 currentLane = targetLane;
             }
         }
-
+        /// <summary>
+        /// Performs jump movement.
+        /// </summary>
         public void Jump()
         {
             if (jumpMovementStrategy.CanMove(transform))
@@ -60,6 +65,9 @@ namespace Control
 
         public bool IsGrounded => isGrounded;
 
+        /// <summary>
+        /// Checks if the player is grounded.
+        /// </summary>
         private void CheckGrounded()
         {
             isGrounded = Physics.Raycast(transform.position, Vector3.down, 1f, groundLayer);
