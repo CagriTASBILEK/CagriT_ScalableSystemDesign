@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Factory;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,13 +12,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int maxDifficulty = 20;
     
     private LevelFactory levelFactory;
+    private ObstacleFactory obstacleFactory;
     private List<ILevel> activeLevels = new List<ILevel>();
     private int currentDifficulty;
     private float totalDistance = 0f;
 
     private void Awake()
     {
-        levelFactory = new LevelFactory(objectPool);
+        obstacleFactory = new ObstacleFactory(objectPool);
+        levelFactory = new LevelFactory(objectPool, obstacleFactory);
         LoadLevelPrefabsFromResources();
     }
 
@@ -29,6 +32,7 @@ public class LevelManager : MonoBehaviour
             levelFactory.AddLevelPrefab(prefab.name, prefab);
         }
     }
+
     private void Start()
     {
         currentDifficulty = initialDifficulty;

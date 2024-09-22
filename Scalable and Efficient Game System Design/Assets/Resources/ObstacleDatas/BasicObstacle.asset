@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c326c25162cc64689fda716cb70ae3, type: 3}
+  m_Name: BasicObstacle
+  m_EditorClassIdentifier: 
+  obstacleName: BasicObstacle
+  obstaclePrefab: {fileID: 6602543097182977367, guid: 501fd1e2c6fbedb43b9af8183c51bccf, type: 3}

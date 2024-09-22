@@ -122,3 +122,6 @@ MonoBehaviour:
   levelLength: 10
   laneWidth: 1
   laneCount: 3
+  baseObstacleCount: 1
+  obstacleCountIncreaseRate: 0.5
+  minDistanceBetweenObstacles: 2

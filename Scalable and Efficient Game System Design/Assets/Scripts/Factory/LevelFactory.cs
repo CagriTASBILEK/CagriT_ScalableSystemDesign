@@ -1,16 +1,20 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Control;
+using Factory;
 
 public class LevelFactory
 {
     private ObjectPool objectPool;
+    private ObstacleFactory obstacleFactory;
     private List<string> levelTags;
     private List<GameObject> levelPrefabs;
     private int difficultyThresholdForRandom = 10;
     
-    public LevelFactory(ObjectPool objectPool)
+    public LevelFactory(ObjectPool objectPool, ObstacleFactory obstacleFactory)
     {
         this.objectPool = objectPool;
+        this.obstacleFactory = obstacleFactory;
         this.levelTags = new List<string>();
         this.levelPrefabs = new List<GameObject>();
     }
@@ -48,7 +52,7 @@ public class LevelFactory
             return null;
         }
 
-        level.Initialize(difficulty);
+        level.Initialize(difficulty, obstacleFactory);
         return level;
     }
 
@@ -69,6 +73,5 @@ public class LevelFactory
         }
         
         return levelTags[Random.Range(0, levelTags.Count)];
-        
     }
 }

@@ -21,7 +21,7 @@ public class ObjectPool : MonoBehaviour
             poolPrefabs[index] = prefab;
         }
     }
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, Transform parent = null)
     {
         int index = poolTags.IndexOf(tag);
         if (index == -1)
@@ -43,9 +43,16 @@ public class ObjectPool : MonoBehaviour
         }
 
         objectToSpawn.SetActive(true);
+        
         objectToSpawn.transform.SetParent(null);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
+        objectToSpawn.transform.localScale = poolPrefabs[index].transform.localScale;
+    
+        if (parent != null)
+        {
+            objectToSpawn.transform.SetParent(parent, true);
+        }
 
         return objectToSpawn;
     }

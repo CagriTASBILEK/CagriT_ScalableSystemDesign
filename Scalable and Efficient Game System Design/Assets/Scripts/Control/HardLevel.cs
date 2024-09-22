@@ -1,3 +1,4 @@
+using Interface;
 using UnityEngine;
 
 namespace Control
@@ -6,7 +7,26 @@ namespace Control
     {
         protected override void PlaceObstacles(int difficulty)
         {
-            throw new System.NotImplementedException();
+            int obstacleCount = GetObstacleCountForDifficulty(difficulty);
+            float currentZPos = 0;
+
+            for (int i = 0; i < obstacleCount; i++)
+            {
+                currentZPos -= minDistanceBetweenObstacles;
+
+                if (currentZPos < -levelLength)
+                {
+                    break;
+                }
+
+                Vector3 position = GetPositionInLaneWithMinDistance(currentZPos);
+                Vector3 worldPosition = transform.TransformPoint(position);
+                IObstacle obstacle = obstacleFactory.CreateObstacle("BasicObstacle", worldPosition, transform);
+                if (obstacle != null)
+                {
+                    obstacles.Add(obstacle);
+                }
+            }
         }
     }
 }
