@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private IInputHandler inputHandler;
 
     [SerializeField] private int score = 0;
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 100;
     private int currentHealth;
 
     private void Awake()
@@ -24,12 +24,14 @@ public class PlayerController : MonoBehaviour
     {
         GameEvents.OnPlayerMove += HandlePlayerMove;
         GameEvents.OnPlayerJump += HandlePlayerJump;
+        GameEvents.OnPlayerTakeDamage += HandlePlayerTakeDamage;
     }
 
     private void OnDisable()
     {
         GameEvents.OnPlayerMove -= HandlePlayerMove;
         GameEvents.OnPlayerJump -= HandlePlayerJump;
+        GameEvents.OnPlayerTakeDamage -= HandlePlayerTakeDamage;
     }
 
     private void Update()
@@ -61,4 +63,11 @@ public class PlayerController : MonoBehaviour
     {
         playerMovement.Jump();
     }
+    private void HandlePlayerTakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
+    }
+    
+    
 }
