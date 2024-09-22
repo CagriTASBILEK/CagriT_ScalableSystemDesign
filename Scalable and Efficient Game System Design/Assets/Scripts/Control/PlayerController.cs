@@ -8,11 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     private IPlayerMovement playerMovement;
     private IInputHandler inputHandler;
-
-    [SerializeField] private int score = 0;
+    
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
-
+    
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovementControl>();
@@ -67,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
+        GameEvents.InvokePlayerHealthChanged(currentHealth);
     }
-    
     
 }

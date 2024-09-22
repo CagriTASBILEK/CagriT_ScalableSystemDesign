@@ -7,6 +7,7 @@ namespace Event
         public static event Action OnPlayerJump;
         public static event Action<float> OnPlayerMove;
         public static event Action<int> OnPlayerTakeDamage;
+        public static event Action<int> OnPlayerHealthChanged;
 
         public static void InvokePlayerJump()
         {
@@ -19,6 +20,10 @@ namespace Event
         public static void InvokePlayerTakeDamage(int remainingHealth)
         {
             OnPlayerTakeDamage?.Invoke(remainingHealth);
+        }
+        public static void InvokePlayerHealthChanged(int currentHealth)
+        {
+            OnPlayerHealthChanged?.Invoke(currentHealth);
         }
     
     }
