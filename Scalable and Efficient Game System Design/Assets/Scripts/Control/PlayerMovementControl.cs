@@ -34,7 +34,6 @@ namespace Control
             if (isGrounded)
             {
                 transform.position = new Vector3(transform.position.x, 1, transform.position.z);
-                rb.velocity = Vector3.zero;
                 rb.isKinematic = true;
             }
         }
