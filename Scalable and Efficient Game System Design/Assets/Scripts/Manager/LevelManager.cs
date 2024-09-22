@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Control;
 using Factory;
 
 public class LevelManager : MonoBehaviour
@@ -13,7 +14,7 @@ public class LevelManager : MonoBehaviour
     
     private LevelFactory levelFactory;
     private ObstacleFactory obstacleFactory;
-    private List<ILevel> activeLevels = new List<ILevel>();
+    private List<LevelControl> activeLevels = new List<LevelControl>();
     private int currentDifficulty;
     private float totalDistance = 0f;
 
@@ -49,18 +50,27 @@ public class LevelManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        ILevel newLevel = levelFactory.CreateLevel(currentDifficulty);
+        LevelControl newLevel = levelFactory.CreateLevel(currentDifficulty) as LevelControl;
         if (newLevel != null)
         {
-            float zPosition = activeLevels.Count > 0 
-                ? activeLevels[activeLevels.Count - 1].GetEndPosition() + distanceBetweenLevels
-                : 0f;
-            (newLevel as MonoBehaviour).transform.position = new Vector3(0, 0, zPosition);
-            activeLevels.Add(newLevel);
+            float zPosition;
+            if (activeLevels.Count > 0)
+            {
+                LevelControl lastLevel = activeLevels[activeLevels.Count - 1];
+                float newLevelLength = (newLevel.transform.localScale.z*5) + activeLevels[activeLevels.Count - 1].transform.localScale.z*5;
+                zPosition = lastLevel.transform.position.z + newLevelLength;
+            }
+            else
+            {
+                zPosition = 0f;
+            }
 
+            newLevel.transform.position = new Vector3(0, 0, zPosition);
+            activeLevels.Add(newLevel);
+            
             if (activeLevels.Count > maxActiveLevels)
             {
-                ILevel oldLevel = activeLevels[0];
+                LevelControl oldLevel = activeLevels[0];
                 activeLevels.RemoveAt(0);
                 oldLevel.Unload();
                 levelFactory.ReturnLevelToPool(oldLevel);
@@ -91,7 +101,7 @@ public class LevelManager : MonoBehaviour
 
     private void CheckForNewLevel()
     {
-        if (activeLevels.Count == 0 || totalDistance >= activeLevels[0].Length + distanceBetweenLevels)
+        if (activeLevels.Count == 0 || totalDistance >= activeLevels[0].Length)
         {
             LoadNextLevel();
             totalDistance = 0f;

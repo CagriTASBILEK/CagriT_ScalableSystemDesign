@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d686617fa24c47f3a6b2ebc6533cab9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLength: 10
+  levelLength: 100
   laneWidth: 1
   laneCount: 3
   baseObstacleCount: 1
